@@ -25,6 +25,7 @@ namespace Modbus {
   class NetLayer;
   class RtuLayer;
   class TcpLayer;
+  class EncLayer;
   class Message;
 
   /**
@@ -484,6 +485,14 @@ namespace Modbus {
        * the device. If it does not, a @b std::domain_error exception is thrown.
        */
       TcpLayer & tcp();
+
+      /**
+       * @brief underlying TCPRTU ENC layer (backend)
+       *
+       * This function shall return the TCPRTU ENC layer if it is the layer used by
+       * the device. If it does not, a @b std::domain_error exception is thrown.
+       */
+      EncLayer & enc();
 
       /**
        * @brief underlying backend

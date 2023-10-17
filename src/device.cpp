@@ -16,6 +16,7 @@
  */
 #include <modbuspp/rtulayer.h>
 #include <modbuspp/tcplayer.h>
+#include <modbuspp/enclayer.h>
 #include <modbuspp/message.h>
 #include "device_p.h"
 #include "config.h"
@@ -210,6 +211,17 @@ namespace Modbus {
       return * reinterpret_cast<TcpLayer *> (d->backend);
     }
     throw std::domain_error ("Unable to return TCP layer !");
+  }
+
+  // ---------------------------------------------------------------------------
+  EncLayer & Device::enc() {
+
+    if (net() == Enc) {
+      PIMP_D (Device);
+
+      return * reinterpret_cast<EncLayer *> (d->backend);
+    }
+    throw std::domain_error ("Unable to return TCPRTU ENC layer !");
   }
 
   // ---------------------------------------------------------------------------
@@ -505,6 +517,10 @@ namespace Modbus {
 
       case Rtu:
         backend = new RtuLayer (connection, settings);
+        break;
+
+      case Enc:
+        backend = new EncLayer (connection, settings);
         break;
 
       default:

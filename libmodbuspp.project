@@ -16,6 +16,7 @@
       <File Name="include/modbuspp/rtulayer.h"/>
       <File Name="include/modbuspp/slave.h"/>
       <File Name="include/modbuspp/tcplayer.h"/>
+      <File Name="include/modbuspp/enclayer.h"/>
       <File Name="include/modbuspp/timeout.h"/>
       <File Name="include/modbuspp/server.h"/>
       <File Name="include/modbuspp/bufferedslave.h"/>
@@ -71,6 +72,7 @@
     <File Name="src/rtulayer_p.h"/>
     <File Name="src/slave_p.h"/>
     <File Name="src/tcplayer_p.h"/>
+    <File Name="src/enclayer_p.h"/>
     <File Name="src/timeout.cpp"/>
     <File Name="src/server_p.h"/>
     <File Name="src/slave.cpp"/>

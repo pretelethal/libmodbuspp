@@ -55,6 +55,13 @@ namespace Modbus {
      * used for communications over TCP IPv4 and IPv6 networks.
      */
     Tcp,
+    /**
+     * @brief RTUTCP ENC backend
+     *
+     * The TCPRTU ENC PI (Protocol Independent) backend implements a Modbus variant
+     * used for RTU communications over TCP IPv4 and IPv6 networks.
+     */
+    Enc,
     NoNet = Unknown  ///< Unknown network backend
   };
 

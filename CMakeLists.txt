@@ -44,7 +44,7 @@ if(NOT CMAKE_BUILD_TYPE AND NOT CMAKE_CONFIGURATION_TYPES)
     "Debug" "Release" "MinSizeRel" "RelWithDebInfo")
 endif()
 
-set (MODBUSPP_WITH_STATIC 0 CACHE BOOL "Enable building static libraries.")
+set (MODBUSPP_WITH_STATIC 1 CACHE BOOL "Enable building static libraries.")
 set (MODBUSPP_UNIT_TESTS 1 CACHE BOOL "Enable building unit tests.")
 
 # Offer the user the choice of overriding the installation directories
@@ -53,7 +53,7 @@ set(INSTALL_BIN_DIR bin CACHE PATH "Installation directory for executables")
 set(INSTALL_INCLUDE_DIR include CACHE PATH
   "Installation directory for header files")
 set(INSTALL_CODELITE_DIR /usr/share/codelite CACHE PATH "Installation directory for codelite templates")
-option(MODBUSPP_USE_EXTERNAL_JSON "Use an external JSON library" OFF)
+option(MODBUSPP_USE_EXTERNAL_JSON "Use an external JSON library" ON)
 
 set(DEF_INSTALL_CMAKE_DIR lib)
 set(DEF_INSTALL_DOC_DIR share/doc)
@@ -72,16 +72,16 @@ set(CMAKE_THREAD_PREFER_PTHREAD TRUE)
 set(THREADS_PREFER_PTHREAD_FLAG TRUE)
 find_package(Threads REQUIRED)
 
-set(LIBMODBUS_MIN_VERSION "3.1.6")
+set(LIBMODBUS_MIN_VERSION "3.1.10.1")
 find_package(PkgConfig REQUIRED)
 
-pkg_check_modules (LIBMODBUS libmodbusepsi>=${LIBMODBUS_MIN_VERSION})
-if (LIBMODBUS_FOUND)
-  set(LIBMODBUS_NAME modbusepsi)
-else()
-  pkg_check_modules (LIBMODBUS REQUIRED libmodbus>=${LIBMODBUS_MIN_VERSION})
+# pkg_check_modules (LIBMODBUS libmodbusepsi>=${LIBMODBUS_MIN_VERSION})
+# if (LIBMODBUS_FOUND)
+#  set(LIBMODBUS_NAME modbusepsi)
+#else()
+  pkg_check_modules (LIBMODBUS REQUIRED libmodbus=${LIBMODBUS_MIN_VERSION})
   set(LIBMODBUS_NAME modbus)
-endif()
+# endif()
 
 set(LIBMODBUS_PACKAGE lib${LIBMODBUS_NAME}5)
 set(LIBMODBUSDEV_PACKAGE lib${LIBMODBUS_NAME}-dev)
@@ -106,6 +106,10 @@ GetDate(DATE_)
 
 include (GitVersion)
 GetGitVersion(MODBUSPP_VERSION)
+# override GetGitVersion since we are now breaking away from original git versioning, original repo doesn't appear to be active anymore as of 2020
+set(MODBUSPP_VERSION_MAJOR 1)
+set(MODBUSPP_VERSION_MINOR 1)
+set(MODBUSPP_VERSION_PATCH 77)
 set(MODBUSPP_VERSION
   ${MODBUSPP_VERSION_MAJOR}.${MODBUSPP_VERSION_MINOR}.${MODBUSPP_VERSION_PATCH})
 configure_file( ${CMAKE_CURRENT_SOURCE_DIR}/config.h.in

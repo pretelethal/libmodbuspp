@@ -53,6 +53,7 @@ if (MODBUSPP_WITH_DOXYGEN_DOC)
     ${PROJECT_SOURCE_DIR}/include/modbuspp/slavereport.h
     ${PROJECT_SOURCE_DIR}/include/modbuspp/swap.h
     ${PROJECT_SOURCE_DIR}/include/modbuspp/tcplayer.h
+    ${PROJECT_SOURCE_DIR}/include/modbuspp/enclayer.h
     ${PROJECT_SOURCE_DIR}/include/modbuspp/timeout.h
     )
 
