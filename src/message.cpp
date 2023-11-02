@@ -20,6 +20,7 @@
 #include <modbuspp/device.h>
 #include <modbuspp/rtulayer.h>
 #include <modbuspp/tcplayer.h>
+#include <modbuspp/enclayer.h>
 #include "message_p.h"
 #include "config.h"
 
@@ -192,7 +193,7 @@ namespace Modbus {
 
     d->adu.resize (d->maxAduLength, 0);
     d->aduSize = 0;
-    if (d->net == Tcp) {
+    if (d->net == Tcp || d->net == Enc) {
       setSlaveId (MODBUS_TCP_SLAVE);
     }
   }
@@ -211,7 +212,7 @@ namespace Modbus {
   // ---------------------------------------------------------------------------
   uint16_t Message::transactionIdentifier() const {
 
-    if (net() != Tcp) {
+    if (net() != Tcp && net() != Enc) {
 
       throw std::domain_error ("Unable to return transaction identifier if backend is not TCP !");
     }
@@ -222,7 +223,7 @@ namespace Modbus {
   // ---------------------------------------------------------------------------
   void Message::setTransactionIdentifier (uint16_t tid) {
 
-    if (net() != Tcp) {
+    if (net() != Tcp && net() != Enc) {
 
       throw std::domain_error ("Unable to set transaction identifier if backend is not TCP !");
     }
@@ -241,6 +242,7 @@ namespace Modbus {
       if (size() >= 1) {
         switch (net()) {
 
+          case Enc:
           case Tcp: {
             int i = -aduHeaderLength();
 
@@ -456,7 +458,7 @@ namespace Modbus {
     backend (b), transactionId (1) {
 
     adu.resize (maxAduLength, 0);
-    if (net == Tcp) {
+    if (net == Tcp || net == Enc) {
       adu[6] = MODBUS_TCP_SLAVE;
     }
   }
@@ -484,6 +486,10 @@ namespace Modbus {
 
     switch (net) {
 
+      case Enc:
+        b = new EncLayer ("*", "1502");
+        break;
+
       case Tcp:
         b = new TcpLayer ("*", "1502");
         break;
@@ -502,7 +508,7 @@ namespace Modbus {
     maxAduLength =  b->maxAduLength();
     delete b;
     adu.resize (maxAduLength, 0);
-    if (net == Tcp) {
+    if (net == Tcp || net == Enc) {
       adu[6] = MODBUS_TCP_SLAVE;
     }
   }

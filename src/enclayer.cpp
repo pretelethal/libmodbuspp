@@ -129,7 +129,7 @@ namespace enc {
   // ---------------------------------------------------------------------------
   bool EncLayer::prepareToSend (Message & msg) {
 
-    if (msg.net() == Rtu && msg.size() >= 1) {
+    if (msg.net() == Enc && msg.size() >= 1) {
       size_t aduSize = msg.aduSize();
       uint8_t * adu = msg.adu();
 
@@ -174,7 +174,7 @@ namespace enc {
 
   // ---------------------------------------------------------------------------
   EncLayer::Private::Private (const std::string & host, const std::string & service) :
-    NetLayer::Private (Tcp, host, service, MODBUS_TCP_MAX_ADU_LENGTH),
+    NetLayer::Private (Enc, host, service, MODBUS_TCP_MAX_ADU_LENGTH),
     transactionId (1) {
     const char * node = NULL;
 

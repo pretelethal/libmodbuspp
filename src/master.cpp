@@ -171,7 +171,7 @@ namespace Modbus {
     
     if (rc > 0) {
 
-      resp.setAduSize (net() == Tcp ? rc : rc - 2); // remove CRC
+      resp.setAduSize ((net() == Tcp || net() == Enc) ? rc : rc - 2); // remove CRC
     }
     return rc;
   }
@@ -196,6 +196,7 @@ namespace Modbus {
     Device::Private::setBackend (net, connection, settings);
     switch (net) {
 
+      case Enc:
       case Tcp:
         (void) addSlave (TcpSlave);
         break;

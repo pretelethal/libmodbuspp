@@ -88,7 +88,7 @@ set(LIBMODBUSDEV_PACKAGE lib${LIBMODBUS_NAME}-dev)
 
 find_package(Gzip)
 
-pkg_check_modules (UNITTESTPP UnitTest++>=2.0.0)
+pkg_check_modules (UNITTESTPP UnitTest++) #>=2.0.0)
 
 if(MODBUSPP_USE_EXTERNAL_JSON)
   find_package(nlohmann_json 3.2.0 REQUIRED)

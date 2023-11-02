@@ -290,6 +290,7 @@ namespace Modbus {
 
     switch (backend->net()) {
 
+      case Enc:
       case Tcp:
         sock = modbus_tcp_pi_listen (ctx(), 1);
         isOk = (sock != -1);
@@ -314,7 +315,7 @@ namespace Modbus {
   // ---------------------------------------------------------------------------
   void Server::Private::close() {
 
-    if (backend->net() == Tcp) {
+    if (backend->net() == Tcp || backend->net() == Enc) {
 
       if (sock != -1) {
 
@@ -404,7 +405,7 @@ namespace Modbus {
   // static
   int Server::Private::receive (Private * d) {
     int rc;
-    if ( (d->backend->net() == Tcp) && !d->isConnected()) {
+    if ( (d->backend->net() == Tcp || d->backend->net() == Enc) && !d->isConnected()) {
 
       // accept blocking call !
       if (modbus_tcp_pi_accept (d->ctx(), &d->sock) < 0) {
