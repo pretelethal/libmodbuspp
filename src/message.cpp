@@ -18,6 +18,7 @@
 #include <sstream>
 #include <cstring>
 #include <modbuspp/device.h>
+#include <modbuspp/rtucrc.h>
 #include <modbuspp/rtulayer.h>
 #include <modbuspp/tcplayer.h>
 #include <modbuspp/enclayer.h>
@@ -256,7 +257,7 @@ namespace Modbus {
           break;
 
           case Rtu: {
-            uint16_t crc = RtuLayer::crc16 (adu(), aduSize());
+            uint16_t crc = RtuCrc::crc16 (adu(), aduSize());
 
             setWord (size(), crc);
           }
@@ -329,7 +330,7 @@ namespace Modbus {
   // ---------------------------------------------------------------------------
   uint16_t Message::crc () const {
 
-    if (net() != Rtu) {
+    if (net() != Rtu || net() != Enc) {
 
       throw std::domain_error ("Unable to return CRC if backend is not RTU !");
     }

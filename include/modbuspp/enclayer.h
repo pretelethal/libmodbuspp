@@ -17,23 +17,24 @@
 #pragma once
 
 #include <modbuspp/netlayer.h>
+#include <modbuspp/rtucrc.h>
 
 namespace Modbus {
 
   /**
    * @class EncLayer
-   * @brief RTU serial link layer
+   * @brief Encapsulated RTU over TCP/IP v4 & v6 network layer
    *
    * This class can not and should not be instantiated by the user.
-   * It provides access to properties and methods specific to the RTU layer.
+   * It provides access to properties and methods specific to the Enc layer.
    *
    * An instance of this class is created by the constructor @b Device::Device()
-   * of the @b Device class (or its derived classes) if the RTU layer is selected.
+   * of the @b Device class (or its derived classes) if the Enc layer is selected.
    *
-   * Access to this instance is done using the Device::rtu() method.
+   * Access to this instance is done using the Device::enc() method.
    *
    * @sa Device::Device()
-   * @sa Device::rtu()
+   * @sa Device::enc()
    * 
    * @author Pascal JEAN, aka epsilonrt
    * @copyright GNU Lesser General Public License
@@ -75,11 +76,6 @@ namespace Modbus {
        * @overload
        */
       static bool checkMessage (const Message & msg);
-
-      /**
-       * @brief Performing Modbus CRC16 generation of the buffer @b buf
-       */
-      static uint16_t crc16 (const uint8_t * buf, uint16_t count);
 
     protected:
       class Private;

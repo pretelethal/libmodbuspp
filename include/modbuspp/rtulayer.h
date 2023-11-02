@@ -17,6 +17,7 @@
 #pragma once
 
 #include <modbuspp/netlayer.h>
+#include <modbuspp/rtucrc.h>
 
 namespace Modbus {
 
@@ -188,11 +189,6 @@ namespace Modbus {
        * If the parity is None, this function returns 2, otherwise returns 1.
        */
       static int stop (const std::string & settings);
-      
-      /**
-       * @brief Performing Modbus CRC16 generation of the buffer @b buf
-       */
-      static uint16_t crc16 (const uint8_t * buf, uint16_t count);
 
     protected:
       class Private;

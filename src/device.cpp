@@ -221,7 +221,7 @@ namespace Modbus {
 
       return * reinterpret_cast<EncLayer *> (d->backend);
     }
-    throw std::domain_error ("Unable to return TCPRTU ENC layer !");
+    throw std::domain_error ("Unable to return ENC RTU over TCP layer !");
   }
 
   // ---------------------------------------------------------------------------
