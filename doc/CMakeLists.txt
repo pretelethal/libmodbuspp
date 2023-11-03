@@ -47,6 +47,7 @@ if (MODBUSPP_WITH_DOXYGEN_DOC)
     ${PROJECT_SOURCE_DIR}/include/modbuspp/request.h
     ${PROJECT_SOURCE_DIR}/include/modbuspp/response.h
     ${PROJECT_SOURCE_DIR}/include/modbuspp/router.h
+    ${PROJECT_SOURCE_DIR}/include/modbuspp/rtucrc.h
     ${PROJECT_SOURCE_DIR}/include/modbuspp/rtulayer.h
     ${PROJECT_SOURCE_DIR}/include/modbuspp/server.h
     ${PROJECT_SOURCE_DIR}/include/modbuspp/slave.h
