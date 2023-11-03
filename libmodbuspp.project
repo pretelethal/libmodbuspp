@@ -12,6 +12,7 @@
       <File Name="include/modbuspp/data.h"/>
       <File Name="include/modbuspp/device.h"/>
       <File Name="include/modbuspp/master.h"/>
+      <File Name="include/modbuspp/rtucrc.h"/>
       <File Name="include/modbuspp/netlayer.h"/>
       <File Name="include/modbuspp/rtulayer.h"/>
       <File Name="include/modbuspp/slave.h"/>
@@ -63,6 +64,7 @@
   <VirtualDirectory Name="src">
     <File Name="src/device.cpp"/>
     <File Name="src/master.cpp"/>
+    <File Name="src/rtucrc.cpp"/>
     <File Name="src/netlayer.cpp"/>
     <File Name="src/rtulayer.cpp"/>
     <File Name="src/tcplayer.cpp"/>
